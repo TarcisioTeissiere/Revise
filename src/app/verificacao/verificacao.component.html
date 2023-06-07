@@ -1,0 +1,7 @@
+<h2>Verificação de Troca</h2>
+<hr />
+<div *ngFor="let item of items">
+  <p>{{ item.tipo }} - {{ item.marcaModelo }}</p>
+  <p>Status: {{ getStatus(item.ano) }}</p>
+  <hr />
+</div>

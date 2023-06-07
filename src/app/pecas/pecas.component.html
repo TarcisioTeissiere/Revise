@@ -1,0 +1,68 @@
+<div *ngIf="auth.user">
+  <div class="container-fluid m-2">
+    <router-outlet></router-outlet>
+  </div>
+  <h2>Listagem de peças de carro cadastradas</h2>
+  <hr />
+  <div>
+    <div>Digite a marca e modelo dos pneus:</div>
+    <div><input [(ngModel)]="formPneus" /></div>
+    <div>Digite o ano dos pneus:</div>
+    <div><input type="number" [(ngModel)]="formAnoPneus" /></div>
+    <br />
+    <button (click)="addItem('Pneus', formPneus, formAnoPneus)">
+      Cadastrar Pneus
+    </button>
+    <hr />
+  </div>
+  <div>
+    <div>Digite a marca e modelo dos faróis:</div>
+    <div><input [(ngModel)]="formFarois" /></div>
+    <div>Digite o ano dos faróis:</div>
+    <div><input type="number" [(ngModel)]="formAnoFarois" /></div>
+    <br />
+    <button (click)="addItem('Faróis', formFarois, formAnoFarois)">
+      Cadastrar Faróis
+    </button>
+    <hr />
+  </div>
+  <div>
+    <div>Digite a marca e modelo da bateria:</div>
+    <div><input [(ngModel)]="formBateria" /></div>
+    <div>Digite o ano da bateria:</div>
+    <div><input type="number" [(ngModel)]="formAnoBateria" /></div>
+    <br />
+    <button (click)="addItem('Bateria', formBateria, formAnoBateria)">
+      Cadastrar Bateria
+    </button>
+    <hr />
+  </div>
+
+  <h2>Itens cadastrados</h2>
+  <hr />
+  <table border="1">
+    <tr>
+      <th>Tipo</th>
+      <th>Marca/Modelo</th>
+      <th>Ano</th>
+      <th>Status</th>
+      <th>Remover</th>
+    </tr>
+    <tr *ngFor="let item of list | async">
+      <td>{{ item.tipo }}</td>
+      <td>{{ item.marcaModelo }}</td>
+      <td>{{ item.ano }}</td>
+      <td>
+        <ng-container *ngIf="item.ano <= 2; else trocaUrgente"
+          >Não é necessário a troca</ng-container
+        >
+        <ng-template #trocaUrgente
+          >Precisa realizar a troca urgentemente</ng-template
+        >
+      </td>
+      <td>
+        <button (click)="deleteItem(item.key)">Deletar</button>
+      </td>
+    </tr>
+  </table>
+</div>

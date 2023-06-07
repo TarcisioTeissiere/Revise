@@ -1,0 +1,28 @@
+<div *ngIf="!auth.user">
+  <h1>Projeto Revise</h1>
+  <form>
+    <fieldset class="label">
+      <legend>Login</legend>
+      <div class="label">Digite seu Email</div>
+      <input type="text" name="email" [(ngModel)]="email" />
+      <div class="label">Digite sua Senha</div>
+      <input type="password" name="password" [(ngModel)]="password" />
+      <hr />
+      <button (click)="auth.emailSignin(this.email, this.password)">
+        Entrar com o Email
+      </button>
+      ou
+      <button (click)="auth.googleSignin()">Entrar com o Google</button>
+    </fieldset>
+  </form>
+</div>
+
+<div *ngIf="auth.error" style="color: red">
+  {{ auth.error }}
+</div>
+<div *ngIf="auth.user">
+  <app-navbar></app-navbar>
+  <div class="container-fluid m-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>

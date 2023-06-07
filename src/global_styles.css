@@ -1,0 +1,19 @@
+:root,
+div {
+  background-color: #313131;
+}
+
+h1 {
+  color: #ffe500;
+}
+
+.label {
+  color: white;
+}
+
+button {
+  border: 2px solid #ffe500;
+  color: white;
+  border-radius: 3px;
+  background-color: black;
+}

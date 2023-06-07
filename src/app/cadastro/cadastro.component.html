@@ -1,0 +1,48 @@
+<div *ngIf="auth.user">
+  <div class="container-fluid m-2">
+    <router-outlet></router-outlet>
+  </div>
+  <h2>Listagem de carros cadastrados</h2>
+  <hr />
+  <div>Digite a marca do seu carro:</div>
+  <div><input [(ngModel)]="formNewMarca" /></div>
+  <div>Digite o modelo do seu carro:</div>
+  <div><input [(ngModel)]="formNewModelo" /></div>
+  <div>Digite o ano do seu carro:</div>
+  <div><input type="number" [(ngModel)]="formNewAno" /></div>
+  <br />
+  <button (click)="addItem()">Cadastrar</button>
+  <hr />
+  <table border="1">
+    <tr>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Ano</th>
+      <th>
+        Escolher <br />
+        Peças
+      </th>
+      <th>
+        Remover <br />
+        Carro
+      </th>
+    </tr>
+    <tr *ngFor="let item of list | async">
+      <td [title]="['chave: ' + item.key]">{{ item.marca }}</td>
+      <td>{{ item.modelo }}</td>
+      <td>{{ item.ano }}</td>
+      <td>
+        <a
+          class="nav-link"
+          [routerLink]="'/pecas'"
+          [routerLinkActive]="'active'"
+          aria-current="page"
+          >Escolher</a
+        >
+      </td>
+      <td>
+        <button (click)="deleteItem(item.key)">Deletar</button>
+      </td>
+    </tr>
+  </table>
+</div>
