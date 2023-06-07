@@ -17,3 +17,11 @@ button {
   border-radius: 3px;
   background-color: black;
 }
+
+th,
+td,
+ng-container,
+div,
+.nav-link {
+  color: white;
+}
