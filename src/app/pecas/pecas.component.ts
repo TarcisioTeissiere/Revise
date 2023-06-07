@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 
 export interface ItemPeca {
   key: string;
+  email: string;
   tipo: string;
   modelo: string;
   tempo: number;
@@ -47,7 +48,14 @@ export class PecasComponent implements OnInit {
 
   ngOnInit() {}
 
+  errorMessage: string = '';
+
   addItemPeca(tipo: string, modelo: string, tempo: string) {
+    if (tempo === null || parseInt(tempo) <= 0) {
+      this.errorMessage =
+        'Esse item não é uma peça ou não possui tempo de troca.';
+      return;
+    }
     this.listRef.push({
       tipo: tipo,
       modelo: modelo,

@@ -38,13 +38,17 @@
     <hr />
   </div>
 
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <h2>Itens cadastrados</h2>
   <hr />
   <table border="1">
     <tr>
       <th>Tipo</th>
       <th>Modelo</th>
-      <th>Ano</th>
+      <th>Meses de uso</th>
       <th>Status</th>
       <th>Remover</th>
     </tr>
@@ -53,13 +57,20 @@
       <td>{{ item.modelo }}</td>
       <td>{{ item.tempo }}</td>
       <td>
-        <ng-container *ngIf="item.tempo <= 6; else trocaUrgente"
-          >Não é necessário a troca</ng-container
-        >
-        <ng-template #trocaUrgente
-          >Precisa realizar a troca urgentemente</ng-template
-        >
+        <ng-container *ngIf="item.email"> Não é uma peça </ng-container>
+        <ng-container *ngIf="!item.email">
+          <ng-container *ngIf="item.tempo <= 0">
+            Essa peça não tem validade
+          </ng-container>
+          <ng-container *ngIf="item.tempo > 0 && item.tempo <= 6">
+            Não é necessário a troca
+          </ng-container>
+          <ng-container *ngIf="item.tempo > 6">
+            Precisa realizar a troca urgentemente
+          </ng-container>
+        </ng-container>
       </td>
+
       <td>
         <button (click)="deleteItemPeca(item.key)">Deletar</button>
       </td>
