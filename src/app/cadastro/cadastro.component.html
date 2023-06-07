@@ -13,6 +13,11 @@
   <br />
   <button (click)="addItem()">Cadastrar</button>
   <hr />
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <table border="1">
     <tr>
       <th>Marca</th>

@@ -44,25 +44,27 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit() {}
 
+  errorMessage: string = '';
+
   addItem() {
-    const emailExist = this.list.some((item) => item.email === this.auth.user.email);
-    if (emailExist) {
-      // Email já existe nos dados, exiba uma mensagem de erro ou tome alguma ação apropriada
-      console.log('Você só pode cadastrar um carro por vez.');
-      return;
-    }
-  
-    this.listRef.push({
-      marca: this.formNewMarca,
-      modelo: this.formNewModelo,
-      ano: this.formNewAno,
-      email: this.auth.user.email,
+    this.list.subscribe((items) => {
+      const emailExist = items.some((item) => item.email === this.auth.user.email);
+      if (emailExist) {
+        this.errorMessage = 'Você só pode cadastrar um carro por vez.';
+        return;
+      }
+
+      this.listRef.push({
+        marca: this.formNewMarca,
+        modelo: this.formNewModelo,
+        ano: this.formNewAno,
+        email: this.auth.user.email,
+      });
+      this.formNewMarca = '';
+      this.formNewModelo = '';
+      this.formNewAno = '';
     });
-    this.formNewMarca = '';
-    this.formNewModelo = '';
-    this.formNewAno = '';
   }
-  
 
   deleteItem(key: string) {
     this.listRef.remove(key);
