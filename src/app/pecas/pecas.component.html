@@ -5,9 +5,9 @@
   <h2>Listagem de peças de carro cadastradas</h2>
   <hr />
   <div>
-    <div>Digite a marca e modelo dos pneus:</div>
+    <div>Digite a marca dos pneus:</div>
     <div><input [(ngModel)]="formPneus" /></div>
-    <div>Digite o ano dos pneus:</div>
+    <div>Digite em meses o tempo de uso dos pneus:</div>
     <div><input type="number" [(ngModel)]="formAnoPneus" /></div>
     <br />
     <button (click)="addItemPeca('Pneus', formPneus, formAnoPneus)">
@@ -16,9 +16,9 @@
     <hr />
   </div>
   <div>
-    <div>Digite a marca e modelo dos faróis:</div>
+    <div>Digite a marca dos faróis:</div>
     <div><input [(ngModel)]="formFarois" /></div>
-    <div>Digite o ano dos faróis:</div>
+    <div>Digite em meses o tempo de uso dos faróis:</div>
     <div><input type="number" [(ngModel)]="formAnoFarois" /></div>
     <br />
     <button (click)="addItemPeca('Faróis', formFarois, formAnoFarois)">
@@ -29,7 +29,7 @@
   <div>
     <div>Digite a marca e modelo da bateria:</div>
     <div><input [(ngModel)]="formBateria" /></div>
-    <div>Digite o ano da bateria:</div>
+    <div>Digite em meses o tempo de uso da bateria:</div>
     <div><input type="number" [(ngModel)]="formAnoBateria" /></div>
     <br />
     <button (click)="addItemPeca('Bateria', formBateria, formAnoBateria)">
@@ -47,7 +47,7 @@
   <table border="1">
     <tr>
       <th>Tipo</th>
-      <th>Modelo</th>
+      <th>Marca</th>
       <th>Meses de uso</th>
       <th>Status</th>
       <th>Remover</th>

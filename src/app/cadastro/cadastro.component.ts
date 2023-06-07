@@ -47,23 +47,15 @@ export class CadastroComponent implements OnInit {
   errorMessage: string = '';
 
   addItem() {
-    this.list.subscribe((items) => {
-      const emailExist = items.some((item) => item.email === this.auth.user.email);
-      if (emailExist) {
-        this.errorMessage = 'Você só pode cadastrar um carro por vez.';
-        return;
-      }
-
-      this.listRef.push({
-        marca: this.formNewMarca,
-        modelo: this.formNewModelo,
-        ano: this.formNewAno,
-        email: this.auth.user.email,
-      });
-      this.formNewMarca = '';
-      this.formNewModelo = '';
-      this.formNewAno = '';
+    this.listRef.push({
+      marca: this.formNewMarca,
+      modelo: this.formNewModelo,
+      ano: this.formNewAno,
+      email: this.auth.user.email,
     });
+    this.formNewMarca = '';
+    this.formNewModelo = '';
+    this.formNewAno = '';
   }
 
   deleteItem(key: string) {
