@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { map } from 'rxjs/operators';
 
-export interface Item {
+export interface ItemPeca {
   key: string;
   tipo: string;
-  marcaModelo: string;
-  ano: number;
+  modelo: string;
+  tempo: number;
 }
 @Component({
   selector: 'app-pecas',
@@ -32,14 +32,14 @@ export class PecasComponent implements OnInit {
   formAnoBateria = '' as string;
 
   listRef: any;
-  list: Observable<Item[]>;
+  list: Observable<ItemPeca[]>;
 
   constructor(public auth: AuthService, private database: AngularFireDatabase) {
     this.listRef = database.list('list');
     this.list = this.listRef
       .snapshotChanges()
       .pipe(
-        map((changes: SnapshotAction<Item>[]) =>
+        map((changes: SnapshotAction<ItemPeca>[]) =>
           changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
@@ -47,12 +47,11 @@ export class PecasComponent implements OnInit {
 
   ngOnInit() {}
 
-  addItem(tipo: string, marcaModelo: string, ano: string) {
+  addItemPeca(tipo: string, modelo: string, tempo: string) {
     this.listRef.push({
       tipo: tipo,
-      marcaModelo: marcaModelo,
-      ano: parseInt(ano),
-      email: this.auth.user.email,
+      modelo: modelo,
+      tempo: parseInt(tempo),
     });
 
     // Limpar os campos após adicionar o item
@@ -68,7 +67,7 @@ export class PecasComponent implements OnInit {
     }
   }
 
-  deleteItem(key: string) {
+  deleteItemPeca(key: string) {
     this.listRef.remove(key);
   }
 }

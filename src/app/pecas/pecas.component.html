@@ -10,7 +10,7 @@
     <div>Digite o ano dos pneus:</div>
     <div><input type="number" [(ngModel)]="formAnoPneus" /></div>
     <br />
-    <button (click)="addItem('Pneus', formPneus, formAnoPneus)">
+    <button (click)="addItemPeca('Pneus', formPneus, formAnoPneus)">
       Cadastrar Pneus
     </button>
     <hr />
@@ -21,7 +21,7 @@
     <div>Digite o ano dos faróis:</div>
     <div><input type="number" [(ngModel)]="formAnoFarois" /></div>
     <br />
-    <button (click)="addItem('Faróis', formFarois, formAnoFarois)">
+    <button (click)="addItemPeca('Faróis', formFarois, formAnoFarois)">
       Cadastrar Faróis
     </button>
     <hr />
@@ -32,7 +32,7 @@
     <div>Digite o ano da bateria:</div>
     <div><input type="number" [(ngModel)]="formAnoBateria" /></div>
     <br />
-    <button (click)="addItem('Bateria', formBateria, formAnoBateria)">
+    <button (click)="addItemPeca('Bateria', formBateria, formAnoBateria)">
       Cadastrar Bateria
     </button>
     <hr />
@@ -43,17 +43,17 @@
   <table border="1">
     <tr>
       <th>Tipo</th>
-      <th>Marca/Modelo</th>
+      <th>Modelo</th>
       <th>Ano</th>
       <th>Status</th>
       <th>Remover</th>
     </tr>
     <tr *ngFor="let item of list | async">
       <td>{{ item.tipo }}</td>
-      <td>{{ item.marcaModelo }}</td>
-      <td>{{ item.ano }}</td>
+      <td>{{ item.modelo }}</td>
+      <td>{{ item.tempo }}</td>
       <td>
-        <ng-container *ngIf="item.ano <= 2; else trocaUrgente"
+        <ng-container *ngIf="item.tempo <= 6; else trocaUrgente"
           >Não é necessário a troca</ng-container
         >
         <ng-template #trocaUrgente
@@ -61,7 +61,7 @@
         >
       </td>
       <td>
-        <button (click)="deleteItem(item.key)">Deletar</button>
+        <button (click)="deleteItemPeca(item.key)">Deletar</button>
       </td>
     </tr>
   </table>

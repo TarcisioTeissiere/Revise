@@ -19,27 +19,19 @@
       <th>Modelo</th>
       <th>Ano</th>
       <th>
-        Escolher <br />
-        Peças
-      </th>
-      <th>
         Remover <br />
         Carro
       </th>
     </tr>
     <tr *ngFor="let item of list | async">
-      <td [title]="['chave: ' + item.key]">{{ item.marca }}</td>
+      <td [title]="'chave: ' + item.key">
+        <ng-container *ngIf="item.marca; else noMarca">{{
+          item.marca
+        }}</ng-container>
+        <ng-template #noMarca>{{ item.modelo }}</ng-template>
+      </td>
       <td>{{ item.modelo }}</td>
       <td>{{ item.ano }}</td>
-      <td>
-        <a
-          class="nav-link"
-          [routerLink]="'/pecas'"
-          [routerLinkActive]="'active'"
-          aria-current="page"
-          >Escolher</a
-        >
-      </td>
       <td>
         <button (click)="deleteItem(item.key)">Deletar</button>
       </td>
